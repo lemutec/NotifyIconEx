@@ -1,30 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>net462;net472;net48;net6.0-windows;net7.0-windows</TargetFrameworks>
-    <PackageId>PicaPico.NotifyIcon</PackageId>
-    <UseWPF>true</UseWPF>
-    <Version>1.0.0</Version>
-    <Authors>picapico</Authors>
-    <Company>picapico</Company>
-    <Product>NotifyIcon</Product>
-    <Description>An an easy-to-use library for displaying NotifyIcon (notification icon) in both WPF and WinForms applications, offering non-intrusive system notifications and quick access functionality in the taskbar.</Description>
-    <PackageProjectUrl>https://github.com/HeHang0/NotifyIcon</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/HeHang0/NotifyIcon</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageTags>NotifyIcon .NET WPF WinForm</PackageTags>
-    <PackageReleaseNotes>First release</PackageReleaseNotes>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFrameworks>net462;net472;net48;net6.0-windows;net7.0-windows</TargetFrameworks>
+		<LangVersion>12.0</LangVersion>
+        <PackageId>NotifyIconEx</PackageId>
+		<UseWPF>false</UseWPF>
+		<UseWinUI>false</UseWinUI>
+		<UseWindowsForms>true</UseWindowsForms>
+        <Version>1.0.0</Version>
+        <Authors>Lemutec</Authors>
+        <Company>Lemutec</Company>
+        <Product>NotifyIconEx</Product>
+        <Description>Support dark mode theme NotifyIcon in WPF WinForm</Description>
+        <PackageProjectUrl>https://github.com/lemutec/NotifyIconEx</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/lemutec/NotifyIconEx</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>NotifyIcon .NET WPF WinForm</PackageTags>
+        <PackageReleaseNotes>First release</PackageReleaseNotes>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <None Include="..\README.md" Pack="true" PackagePath="" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="PicaPico.ThemeListener" Version="1.0.0" />
-    <PackageReference Include="Microsoft-WindowsAPICodePack-Shell-6.0" Version="1.1.5" />
-  </ItemGroup>
+    <ItemGroup>
+        <None Include="..\README.md" Pack="true" PackagePath="" />
+    </ItemGroup>
 
 </Project>

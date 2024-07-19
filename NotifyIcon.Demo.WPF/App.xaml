@@ -1,8 +1,7 @@
-﻿<Application x:Class="PicaPico.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:PicaPico">
-    <Application.Resources>
-         
-    </Application.Resources>
+﻿<Application
+    x:Class="WPFApp1.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:WPFApp1">
+    <Application.Resources />
 </Application>

@@ -1,5 +1,6 @@
-﻿using System.Drawing.Drawing2D;
-using System.Drawing;
+﻿using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
 
 namespace NotifyIconEx;
@@ -69,5 +70,52 @@ internal class ModernToolStripRenderer : ToolStripProfessionalRenderer
     protected override void OnRenderImageMargin(ToolStripRenderEventArgs e)
     {
         ///
+    }
+
+    protected override void OnRenderItemImage(ToolStripItemImageRenderEventArgs e)
+    {
+        Rectangle imageRect = e.ImageRectangle;
+        Image image = e.Image;
+
+        if (imageRect != Rectangle.Empty && image is not null)
+        {
+            if (!e.Item.Enabled)
+            {
+                float[][] matrixItems = [
+                    [1, 0, 0, 0, 0],
+                    [0, 1, 0, 0, 0],
+                    [0, 0, 1, 0, 0],
+                    [0, 0, 0, 0.5f, 0],
+                    [0, 0, 0, 0, 1]
+                ];
+
+                ColorMatrix colorMatrix = new(matrixItems);
+                ImageAttributes imageAttributes = new();
+                imageAttributes.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+
+                imageRect.Offset(6, 0);
+                e.Graphics.DrawImage(
+                    image,
+                    imageRect,
+                    0,
+                    0,
+                    image.Width,
+                    image.Height,
+                    GraphicsUnit.Pixel,
+                    imageAttributes);
+                return;
+            }
+
+            // Since office images don't scoot one px we have to override all painting but enabled = false;
+            if (e.Item.ImageScaling == ToolStripItemImageScaling.None)
+            {
+                e.Graphics.DrawImage(image, imageRect, new Rectangle(new Point(6, 0), imageRect.Size), GraphicsUnit.Pixel);
+            }
+            else
+            {
+                imageRect.Offset(6, 0);
+                e.Graphics.DrawImage(image, imageRect);
+            }
+        }
     }
 }

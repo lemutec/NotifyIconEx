@@ -12,7 +12,7 @@ public class ModernToolStripRenderer : ToolStripProfessionalRenderer
     {
         ToolStripItem item = e.Item!;
 
-        DrawChevronRightArrow(e.Graphics, e.ArrowRectangle, item.Enabled ? item.ForeColor : Color.FromArgb(byte.MaxValue / 2, item.ForeColor.R, item.ForeColor.G, item.ForeColor.A));
+        DrawChevronRightArrow(e.Graphics, e.ArrowRectangle, item.Enabled ? item.ForeColor : Color.FromArgb(byte.MaxValue / 2, item.ForeColor.R, item.ForeColor.B, item.ForeColor.G));
     }
 
     protected override void OnRenderItemCheck(ToolStripItemImageRenderEventArgs e)

@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Drawing;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
-using System.ComponentModel;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace NotifyIconEx;
 
 public class NotifyIcon
 {
-    private readonly System.Windows.Forms.NotifyIcon notifyIcon = null;
-    private readonly ToolStripRenderer toolStripRenderer = null;
+    private readonly System.Windows.Forms.NotifyIcon notifyIcon = null!;
+    private readonly ToolStripRenderer toolStripRenderer = null!;
     protected EventHandlerList Events = new();
     private static readonly object EVENT_MOUSEDOWN = new();
     private static readonly object EVENT_MOUSEMOVE = new();
@@ -24,7 +23,7 @@ public class NotifyIcon
     private static readonly object EVENT_BALLOONTIPCLOSED = new();
     private static readonly object EVENT_DISPOSED = new();
 
-    public NotifyIcon(ToolStripRenderer toolStripRenderer = null)
+    public NotifyIcon(ToolStripRenderer toolStripRenderer = null!)
     {
         this.toolStripRenderer = toolStripRenderer ?? new ModernToolStripRenderer();
         Control.CheckForIllegalCrossThreadCalls = false;
@@ -63,11 +62,11 @@ public class NotifyIcon
         {
             if (menuItem.Text == "-")
             {
-                notifyIcon.ContextMenuStrip.Items.Add(new ToolStripSeparator());
+                notifyIcon.ContextMenuStrip!.Items.Add(new ToolStripSeparator());
                 continue;
             }
             menuItem.Margin = new(8);
-            notifyIcon.ContextMenuStrip.Items.Add(menuItem);
+            notifyIcon.ContextMenuStrip!.Items.Add(menuItem);
         }
         UpdateStyle();
     }
@@ -79,7 +78,7 @@ public class NotifyIcon
             ContextMenuStrip = new ContextMenuStrip();
         }
 
-        notifyIcon.ContextMenuStrip.Items.Add(menuItem);
+        notifyIcon.ContextMenuStrip!.Items.Add(menuItem);
         UpdateStyle();
         return menuItem;
     }
@@ -89,7 +88,7 @@ public class NotifyIcon
         if (text == "-")
         {
             ToolStripSeparator item = new();
-            notifyIcon.ContextMenuStrip.Items.Add(item);
+            notifyIcon.ContextMenuStrip!.Items.Add(item);
             return item;
         }
         return AddMenu(new ToolStripMenuItem(text));
@@ -136,7 +135,7 @@ public class NotifyIcon
         {
             return;
         }
-        SetContextMenuRoundedCorner(notifyIcon.ContextMenuStrip.Handle);
+        DwmApi.SetContextMenuRoundedCorner(notifyIcon.ContextMenuStrip.Handle);
         notifyIcon.ContextMenuStrip.Renderer = toolStripRenderer;
         notifyIcon.ContextMenuStrip.HandleCreated += ContextMenuStrip_HandleCreated;
     }
@@ -221,25 +220,25 @@ public class NotifyIcon
 
     public object Tag
     {
-        get => notifyIcon.Tag;
+        get => notifyIcon.Tag!;
         set => notifyIcon.Tag = value;
     }
 
     public ISite Site
     {
-        get => notifyIcon.Site;
+        get => notifyIcon.Site!;
         set => notifyIcon.Site = value;
     }
 
     public Icon Icon
     {
-        get => notifyIcon.Icon;
+        get => notifyIcon.Icon!;
         set => notifyIcon.Icon = value;
     }
 
     public ContextMenuStrip ContextMenuStrip
     {
-        get => notifyIcon.ContextMenuStrip;
+        get => notifyIcon.ContextMenuStrip!;
         set
         {
             if (notifyIcon.ContextMenuStrip != null)
@@ -257,7 +256,7 @@ public class NotifyIcon
         set => notifyIcon.BalloonTipIcon = value;
     }
 
-    public IContainer Container => notifyIcon.Container;
+    public IContainer Container => notifyIcon.Container!;
 
     public string BalloonTipTitle
     {
@@ -281,9 +280,9 @@ public class NotifyIcon
         notifyIcon.ShowBalloonTip(timeout);
     }
 
-    private void ContextMenuStrip_HandleCreated(object sender, EventArgs e)
+    private void ContextMenuStrip_HandleCreated(object? sender, EventArgs e)
     {
-        SetContextMenuRoundedCorner(notifyIcon.ContextMenuStrip.Handle);
+        DwmApi.SetContextMenuRoundedCorner(notifyIcon.ContextMenuStrip!.Handle);
     }
 
     public void UpdateStyle()
@@ -293,59 +292,43 @@ public class NotifyIcon
             return;
         }
 
-        for (int i = default; i < notifyIcon.ContextMenuStrip.Items.Count; i++)
-        {
-            var item = notifyIcon.ContextMenuStrip.Items[i];
+        UpdatePadding(notifyIcon.ContextMenuStrip.Items);
 
-            if (i == default || i == notifyIcon.ContextMenuStrip.Items.Count - 1)
+        notifyIcon.ContextMenuStrip.BackColor = NotifyIconColors.BackColor;
+        notifyIcon.ContextMenuStrip.ForeColor = NotifyIconColors.ForeColor;
+        notifyIcon.ContextMenuStrip.Invalidate();
+
+        static void UpdatePadding(ToolStripItemCollection items)
+        {
+            for (int i = default; i < items.Count; i++)
             {
-                if (i == default && i == notifyIcon.ContextMenuStrip.Items.Count - 1)
+                var item = items[i];
+
+                if (item is ToolStripMenuItem dropMenuItem && dropMenuItem.DropDownItems.Count > 0)
                 {
-                    item.Margin = new Padding(0, 2, 0, 2);
+                    UpdatePadding(dropMenuItem.DropDownItems);
                 }
-                else if (i == default)
+
+                if (i == default || i == items.Count - 1)
                 {
-                    item.Margin = new Padding(0, 2, 0, 0);
+                    if (i == default && i == items.Count - 1)
+                    {
+                        item.Margin = new Padding(0, 2, 0, 2);
+                    }
+                    else if (i == default)
+                    {
+                        item.Margin = new Padding(0, 2, 0, 0);
+                    }
+                    else if (i == items.Count - 1)
+                    {
+                        item.Margin = new Padding(0, 0, 0, 2);
+                    }
                 }
-                else if (i == notifyIcon.ContextMenuStrip.Items.Count - 1)
+                else
                 {
-                    item.Margin = new Padding(0, 0, 0, 2);
+                    item.Margin = new Padding(0);
                 }
-            }
-            else
-            {
-                item.Margin = new Padding(0);
             }
         }
-
-        bool dark = ThemeListener.IsDarkMode;
-        Color backColor = dark ? Color.FromArgb(0x2B, 0x2B, 0x2B) : Color.FromArgb(0xF2, 0xF2, 0xF2);
-        Color foreColor = dark ? Color.FromArgb(0x99, 0xFF, 0xFF, 0xFF) : Color.FromArgb(0x99, 0x00, 0x00, 0x00);
-        notifyIcon.ContextMenuStrip.BackColor = backColor;
-        notifyIcon.ContextMenuStrip.ForeColor = foreColor;
-        notifyIcon.ContextMenuStrip.Invalidate();
     }
-
-    private static void SetContextMenuRoundedCorner(nint handle)
-    {
-        var attribute = DWMWINDOWATTRIBUTE.DWMWA_WINDOW_CORNER_PREFERENCE;
-        var preference = DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_ROUNDSMALL;
-        DwmSetWindowAttribute(handle, attribute, ref preference, sizeof(uint));
-    }
-
-    public enum DWMWINDOWATTRIBUTE
-    {
-        DWMWA_WINDOW_CORNER_PREFERENCE = 33
-    }
-
-    public enum DWM_WINDOW_CORNER_PREFERENCE
-    {
-        DWMWCP_DEFAULT = 0,
-        DWMWCP_DONOTROUND = 1,
-        DWMWCP_ROUND = 2,
-        DWMWCP_ROUNDSMALL = 3
-    }
-
-    [DllImport("dwmapi.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-    private static extern long DwmSetWindowAttribute(IntPtr hwnd, DWMWINDOWATTRIBUTE attribute, ref DWM_WINDOW_CORNER_PREFERENCE pvAttribute, uint cbAttribute);
 }

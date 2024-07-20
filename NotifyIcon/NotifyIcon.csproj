@@ -3,6 +3,7 @@
     <PropertyGroup>
         <TargetFrameworks>net462;net472;net48;net5.0-windows;net6.0-windows;net7.0-windows;net8.0-windows</TargetFrameworks>
 		<LangVersion>12.0</LangVersion>
+		<Nullable>enable</Nullable>
         <PackageId>NotifyIconEx</PackageId>
 		<UseWPF>false</UseWPF>
 		<UseWinUI>false</UseWinUI>

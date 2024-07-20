@@ -5,8 +5,20 @@ using System.Windows.Forms;
 
 namespace NotifyIconEx;
 
-internal class ModernToolStripRenderer : ToolStripProfessionalRenderer
+public class ModernToolStripRenderer : ToolStripProfessionalRenderer
 {
+    protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
+    {
+        ToolStripItem item = e.Item!;
+
+        if (item is ToolStripDropDownItem)
+        {
+            e.ArrowColor = item.Enabled ? NotifyIconColors.ForeColor : SystemColors.ControlDark;
+        }
+
+        base.OnRenderArrow(e);
+    }
+
     protected override void OnRenderItemCheck(ToolStripItemImageRenderEventArgs e)
     {
         var rect = e.ImageRectangle;
@@ -25,17 +37,15 @@ internal class ModernToolStripRenderer : ToolStripProfessionalRenderer
     protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
     {
         if (!e.Item.Selected) return;
-        Color bgColor = ThemeListener.IsDarkMode ? Color.FromArgb(0x1A, 0xFF, 0xFF, 0xFF) : Color.FromArgb(0x1A, 0, 0, 0);
 
         Rectangle rect = new(4, 0, e.Item.Width - 8, e.Item.Height - 1);
-
-        using SolidBrush brush = new(bgColor);
+        using SolidBrush brush = new(NotifyIconColors.HoverBackColor);
         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
         GraphicsPath path = GetRoundedRect(rect, 3);
         e.Graphics.FillPath(brush, path);
     }
 
-    private GraphicsPath GetRoundedRect(Rectangle rect, int cornerRadius)
+    private static GraphicsPath GetRoundedRect(Rectangle rect, int cornerRadius)
     {
         int diameter = 2 * cornerRadius;
         Size size = new(diameter, diameter);
@@ -64,7 +74,24 @@ internal class ModernToolStripRenderer : ToolStripProfessionalRenderer
 
     protected override void OnRenderToolStripBackground(ToolStripRenderEventArgs e)
     {
-        ///
+        ToolStrip toolStrip = e.ToolStrip;
+
+        if (toolStrip is ContextMenuStrip)
+        {
+            ///
+        }
+        else if (toolStrip is ToolStripDropDownMenu)
+        {
+            DwmApi.SetContextMenuRoundedCorner(toolStrip.Handle);
+            toolStrip.ForeColor = NotifyIconColors.ForeColor;
+            toolStrip.BackColor = NotifyIconColors.BackColor;
+        }
+    }
+
+    protected override void OnRenderSeparator(ToolStripSeparatorRenderEventArgs e)
+    {
+        // No plans to repaint `Separator` nowaday.
+        base.OnRenderSeparator(e);
     }
 
     protected override void OnRenderImageMargin(ToolStripRenderEventArgs e)
@@ -75,7 +102,7 @@ internal class ModernToolStripRenderer : ToolStripProfessionalRenderer
     protected override void OnRenderItemImage(ToolStripItemImageRenderEventArgs e)
     {
         Rectangle imageRect = e.ImageRectangle;
-        Image image = e.Image;
+        Image image = e.Image!;
 
         if (imageRect != Rectangle.Empty && image is not null)
         {

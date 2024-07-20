@@ -290,6 +290,14 @@ public class NotifyIcon
         DwmApi.SetContextMenuRoundedCorner(notifyIcon.ContextMenuStrip!.Handle);
     }
 
+    private void OnContextMenuStripOpening(object? sender, CancelEventArgs e)
+    {
+        if (sender is ContextMenuStrip menu)
+        {
+            menu.Show(new Point(Control.MousePosition.X, Control.MousePosition.Y - menu.Height));
+        }
+    }
+
     public void UpdateStyle()
     {
         if (notifyIcon.ContextMenuStrip == null)
@@ -298,6 +306,9 @@ public class NotifyIcon
         }
 
         UpdatePadding(notifyIcon.ContextMenuStrip.Items);
+
+        notifyIcon.ContextMenuStrip.Opening -= OnContextMenuStripOpening;
+        notifyIcon.ContextMenuStrip.Opening += OnContextMenuStripOpening;
 
         notifyIcon.ContextMenuStrip.BackColor = NotifyIconColors.BackColor;
         notifyIcon.ContextMenuStrip.ForeColor = NotifyIconColors.ForeColor;

@@ -4,13 +4,13 @@ namespace NotifyIconEx;
 
 internal static class ThemeListener
 {
-    private static bool _dark;
+    private static bool _dark = false;
 
     public static bool IsDarkMode => _dark;
 
     public delegate void ThemeChangedEventHandler(bool isDark);
 
-    public static event ThemeChangedEventHandler ThemeChanged;
+    public static event ThemeChangedEventHandler ThemeChanged = null!;
 
     static ThemeListener()
     {
@@ -33,22 +33,22 @@ internal static class ThemeListener
 
     private static bool ReadDarkMode()
     {
-        object registryValueObject;
-        using (RegistryKey key = Registry.CurrentUser.OpenSubKey(REGISTRY_KEY_PATH))
+        object? registryValueObject;
+        using (RegistryKey? key = Registry.CurrentUser.OpenSubKey(REGISTRY_KEY_PATH))
         {
             registryValueObject = key?.GetValue(REGISTRY_VALUE_NAME);
             if (registryValueObject != null)
             {
-                int registryValue = (int)registryValueObject;
+                int? registryValue = (int)registryValueObject;
                 return registryValue <= 0;
             }
         }
-        using (RegistryKey key = Registry.LocalMachine.OpenSubKey(REGISTRY_KEY_PATH))
+        using (RegistryKey? key = Registry.LocalMachine.OpenSubKey(REGISTRY_KEY_PATH))
         {
             registryValueObject = key?.GetValue(REGISTRY_VALUE_NAME);
             if (registryValueObject != null)
             {
-                int registryValue = (int)registryValueObject;
+                int? registryValue = (int)registryValueObject;
                 return registryValue <= 0;
             }
         }

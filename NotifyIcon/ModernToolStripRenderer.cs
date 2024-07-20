@@ -90,8 +90,17 @@ public class ModernToolStripRenderer : ToolStripProfessionalRenderer
 
     protected override void OnRenderSeparator(ToolStripSeparatorRenderEventArgs e)
     {
-        // No plans to repaint `Separator` nowaday.
-        base.OnRenderSeparator(e);
+        using Brush brush = new SolidBrush(NotifyIconColors.SeparatorColor);
+        Rectangle bounds = e.Item.ContentRectangle;
+
+        int margin = 8;
+        int separatorHeight = 1;
+        int separatorWidth = bounds.Width - (2 * margin);
+        int separatorX = bounds.X + margin;
+        int separatorY = bounds.Y + (bounds.Height / 2) - (separatorHeight / 2);
+        Rectangle separatorRect = new(separatorX, separatorY, separatorWidth, separatorHeight);
+
+        e.Graphics.FillRectangle(brush, separatorRect);
     }
 
     protected override void OnRenderImageMargin(ToolStripRenderEventArgs e)

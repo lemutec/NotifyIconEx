@@ -31,17 +31,17 @@ public class NotifyIcon
         {
             Visible = true,
         };
-        notifyIcon.BalloonTipClicked += (sender, e) => { Events[EVENT_BALLOONTIPCLICKED]?.DynamicInvoke(sender, e); };
-        notifyIcon.BalloonTipClosed += (sender, e) => { Events[EVENT_BALLOONTIPCLOSED]?.DynamicInvoke(sender, e); }; ;
-        notifyIcon.BalloonTipShown += (sender, e) => { Events[EVENT_BALLOONTIPSHOWN]?.DynamicInvoke(sender, e); }; ;
-        notifyIcon.Click += (sender, e) => { Events[EVENT_CLICK]?.DynamicInvoke(sender, e); }; ;
-        notifyIcon.Disposed += (sender, e) => { Events[EVENT_DISPOSED]?.DynamicInvoke(sender, e); }; ;
-        notifyIcon.DoubleClick += (sender, e) => { Events[EVENT_DOUBLECLICK]?.DynamicInvoke(sender, e); }; ;
-        notifyIcon.MouseClick += (sender, e) => { Events[EVENT_MOUSECLICK]?.DynamicInvoke(sender, e); }; ;
-        notifyIcon.MouseDoubleClick += (sender, e) => { Events[EVENT_MOUSEDOUBLECLICK]?.DynamicInvoke(sender, e); }; ;
-        notifyIcon.MouseDown += (sender, e) => { Events[EVENT_MOUSEDOWN]?.DynamicInvoke(sender, e); }; ;
-        notifyIcon.MouseMove += (sender, e) => { Events[EVENT_MOUSEMOVE]?.DynamicInvoke(sender, e); }; ;
-        notifyIcon.MouseUp += (sender, e) => { Events[EVENT_MOUSEUP]?.DynamicInvoke(sender, e); }; ;
+        notifyIcon.BalloonTipClicked += (sender, e) => OnEventReceived(sender, e, EVENT_BALLOONTIPCLICKED);
+        notifyIcon.BalloonTipClosed += (sender, e) => OnEventReceived(sender, e, EVENT_BALLOONTIPCLOSED);
+        notifyIcon.BalloonTipShown += (sender, e) => OnEventReceived(sender, e, EVENT_BALLOONTIPSHOWN);
+        notifyIcon.Click += (sender, e) => OnEventReceived(sender, e, EVENT_CLICK);
+        notifyIcon.Disposed += (sender, e) => OnEventReceived(sender, e, EVENT_DISPOSED);
+        notifyIcon.DoubleClick += (sender, e) => OnEventReceived(sender, e, EVENT_DOUBLECLICK);
+        notifyIcon.MouseClick += (sender, e) => OnEventReceived(sender, e, EVENT_MOUSECLICK);
+        notifyIcon.MouseDoubleClick += (sender, e) => OnEventReceived(sender, e, EVENT_MOUSEDOUBLECLICK);
+        notifyIcon.MouseDown += (sender, e) => OnEventReceived(sender, e, EVENT_MOUSEDOWN);
+        notifyIcon.MouseMove += (sender, e) => OnEventReceived(sender, e, EVENT_MOUSEMOVE);
+        notifyIcon.MouseUp += (sender, e) => OnEventReceived(sender, e, EVENT_MOUSEUP);
         UpdateStyle();
         ProcessContextMenuStrip();
         ThemeListener.ThemeChanged += OnThemeChanged;
@@ -135,9 +135,9 @@ public class NotifyIcon
         {
             return;
         }
-        DwmApi.SetContextMenuRoundedCorner(notifyIcon.ContextMenuStrip.Handle);
+        OnContextMenuStripHandleCreated(notifyIcon.ContextMenuStrip, EventArgs.Empty);
         notifyIcon.ContextMenuStrip.Renderer = toolStripRenderer;
-        notifyIcon.ContextMenuStrip.HandleCreated += ContextMenuStrip_HandleCreated;
+        notifyIcon.ContextMenuStrip.HandleCreated += OnContextMenuStripHandleCreated;
     }
 
     public event EventHandler BalloonTipClicked
@@ -243,7 +243,7 @@ public class NotifyIcon
         {
             if (notifyIcon.ContextMenuStrip != null)
             {
-                notifyIcon.ContextMenuStrip.HandleCreated -= ContextMenuStrip_HandleCreated;
+                notifyIcon.ContextMenuStrip.HandleCreated -= OnContextMenuStripHandleCreated;
             }
             notifyIcon.ContextMenuStrip = value;
             ProcessContextMenuStrip();
@@ -280,7 +280,12 @@ public class NotifyIcon
         notifyIcon.ShowBalloonTip(timeout);
     }
 
-    private void ContextMenuStrip_HandleCreated(object? sender, EventArgs e)
+    private void OnEventReceived(object? sender, EventArgs e, object eventKey)
+    {
+        Events[eventKey]?.DynamicInvoke(sender, e);
+    }
+
+    private void OnContextMenuStripHandleCreated(object? sender, EventArgs e)
     {
         DwmApi.SetContextMenuRoundedCorner(notifyIcon.ContextMenuStrip!.Handle);
     }

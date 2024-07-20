@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -13,12 +12,7 @@ public class ModernToolStripRenderer : ToolStripProfessionalRenderer
     {
         ToolStripItem item = e.Item!;
 
-        if (item is ToolStripDropDownItem)
-        {
-            e.ArrowColor = item.Enabled ? NotifyIconColors.ForeColor : SystemColors.ControlDark;
-        }
-
-        DrawChevronRightArrow(e.Graphics, e.ArrowRectangle, e.ArrowColor);
+        DrawChevronRightArrow(e.Graphics, e.ArrowRectangle, item.Enabled ? item.ForeColor : Color.FromArgb(byte.MaxValue / 2, item.ForeColor.R, item.ForeColor.G, item.ForeColor.A));
     }
 
     protected override void OnRenderItemCheck(ToolStripItemImageRenderEventArgs e)

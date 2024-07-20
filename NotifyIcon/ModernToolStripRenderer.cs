@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -70,7 +71,10 @@ public class ModernToolStripRenderer : ToolStripProfessionalRenderer
 
     private static void DrawChevronRightArrow(Graphics g, Rectangle rect, Color color)
     {
-        int arrowSize = Math.Min(rect.Width, rect.Height) / 2;
+        // Fix size and location of the arrow
+        rect = new Rectangle(rect.Left - 9, rect.Top, Math.Max(rect.Width, 15), Math.Max(rect.Width, 28));
+
+        int arrowSize = Math.Min(rect.Width, Math.Max(rect.Height, 28)) / 2;
         int centerX = rect.Left + rect.Width / 2;
         int centerY = rect.Top + rect.Height / 2;
 

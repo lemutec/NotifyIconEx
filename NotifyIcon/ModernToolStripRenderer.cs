@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
@@ -16,7 +17,7 @@ public class ModernToolStripRenderer : ToolStripProfessionalRenderer
             e.ArrowColor = item.Enabled ? NotifyIconColors.ForeColor : SystemColors.ControlDark;
         }
 
-        base.OnRenderArrow(e);
+        DrawChevronRightArrow(e.Graphics, e.ArrowRectangle, e.ArrowColor);
     }
 
     protected override void OnRenderItemCheck(ToolStripItemImageRenderEventArgs e)
@@ -67,6 +68,22 @@ public class ModernToolStripRenderer : ToolStripProfessionalRenderer
         return path;
     }
 
+    private static void DrawChevronRightArrow(Graphics g, Rectangle rect, Color color)
+    {
+        int arrowSize = Math.Min(rect.Width, rect.Height) / 2;
+        int centerX = rect.Left + rect.Width / 2;
+        int centerY = rect.Top + rect.Height / 2;
+
+        using Pen pen = new(color, 2);
+        Point[] chevronPoints =
+        [
+            new Point(centerX - arrowSize / 2, centerY - arrowSize),
+            new Point(centerX + arrowSize / 2, centerY),
+            new Point(centerX - arrowSize / 2, centerY + arrowSize)
+        ];
+        g.DrawLines(pen, chevronPoints);
+    }
+
     protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e)
     {
         ///
@@ -93,8 +110,8 @@ public class ModernToolStripRenderer : ToolStripProfessionalRenderer
         using Brush brush = new SolidBrush(NotifyIconColors.SeparatorColor);
         Rectangle bounds = e.Item.ContentRectangle;
 
-        int margin = 8;
-        int separatorHeight = 1;
+        const int margin = 8;
+        const int separatorHeight = 1;
         int separatorWidth = bounds.Width - (2 * margin);
         int separatorX = bounds.X + margin;
         int separatorY = bounds.Y + (bounds.Height / 2) - (separatorHeight / 2);

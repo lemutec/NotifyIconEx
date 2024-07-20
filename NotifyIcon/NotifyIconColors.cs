@@ -13,7 +13,7 @@ internal static class NotifyIconColors
     private static Color ForeColorDark => Color.FromArgb(0x99, 0xFF, 0xFF, 0xFF);
 
     private static Color BackColorLight => Color.FromArgb(0xF2, 0xF2, 0xF2);
-    private static Color BackColorDark => Color.FromArgb(0x2B, 0x2B, 0x2B);
+    private static Color BackColorDark => Color.FromArgb(0x2C, 0x2C, 0x2C);
 
     private static Color HoverBackColorLight => Color.FromArgb(0x1A, 0x00, 0x00, 0x00);
     private static Color HoverBackColorDark => Color.FromArgb(0x1A, 0xFF, 0xFF, 0xFF);

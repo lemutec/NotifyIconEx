@@ -4,6 +4,8 @@ NotifyIcon is an easy-to-use library for displaying NotifyIcon (notification ico
 
 Support dark mode / show icon / checkable / submenus.
 
+Please enable the HiDPI in your Application for better rendering.
+
 ## Usage
 
 -------

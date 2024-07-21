@@ -3,6 +3,9 @@ name: NotifyIcon Library
 on:
   release:
     types: [created]
+  push:
+    branches:
+      - master
 
 jobs:
   build:

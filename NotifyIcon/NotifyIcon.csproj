@@ -1,29 +1,38 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFrameworks>net462;net472;net48;net5.0-windows;net6.0-windows;net7.0-windows;net8.0-windows</TargetFrameworks>
+	<PropertyGroup>
+		<TargetFrameworks>net462;net472;net48;net5.0-windows;net6.0-windows;net7.0-windows;net8.0-windows</TargetFrameworks>
 		<LangVersion>12.0</LangVersion>
 		<Nullable>enable</Nullable>
-        <PackageId>NotifyIconEx</PackageId>
+		<PackageId>NotifyIconEx</PackageId>
 		<RootNamespace>NotifyIconEx</RootNamespace>
 		<UseWPF>false</UseWPF>
 		<UseWinUI>false</UseWinUI>
 		<UseWindowsForms>true</UseWindowsForms>
-        <Version>1.0.7</Version>
-        <Authors>Lemutec</Authors>
-        <Company>Lemutec</Company>
-        <Product>NotifyIconEx</Product>
-        <Description>NotifyIcon is an easy-to-use library for displaying NotifyIcon (notification icon) in WPF / WinForms / Avalonia / WinUI / MAUI applications, offering non-intrusive system notifications and quick access functionality in the taskbar.</Description>
-        <PackageProjectUrl>https://github.com/lemutec/NotifyIconEx</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/lemutec/NotifyIconEx</RepositoryUrl>
-        <RepositoryType>git</RepositoryType>
-        <PackageTags>NotifyIcon .NET WPF WinForm Avalonia WinUI MAUI</PackageTags>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
-    </PropertyGroup>
+		<Version>1.0.7</Version>
+		<Authors>Lemutec</Authors>
+		<Company>Lemutec</Company>
+		<Product>NotifyIconEx</Product>
+		<Description>NotifyIconEx is an easy-to-use library for displaying NotifyIcon (notification icon) in WPF / WinForms / Avalonia / WinUI / MAUI applications, offering non-intrusive system notifications and quick access functionality in the taskbar.</Description>
+		<PackageProjectUrl>https://github.com/lemutec/NotifyIconEx</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/lemutec/NotifyIconEx</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>NotifyIcon .NET WPF WinForm Avalonia WinUI MAUI</PackageTags>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageIcon>Favicon.png</PackageIcon>
+	</PropertyGroup>
 
-    <ItemGroup>
-        <None Include="..\README.md" Pack="true" PackagePath="" />
+	<ItemGroup>
+		<Content Include="Favicon.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\README.md" Pack="true" PackagePath="" />
+		<None Remove="Favicon.png" />
     </ItemGroup>
 
 </Project>

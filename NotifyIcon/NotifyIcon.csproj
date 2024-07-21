@@ -9,7 +9,7 @@
 		<UseWPF>false</UseWPF>
 		<UseWinUI>false</UseWinUI>
 		<UseWindowsForms>true</UseWindowsForms>
-		<Version>1.0.7</Version>
+		<Version>1.0.8</Version>
 		<Authors>Lemutec</Authors>
 		<Company>Lemutec</Company>
 		<Product>NotifyIconEx</Product>

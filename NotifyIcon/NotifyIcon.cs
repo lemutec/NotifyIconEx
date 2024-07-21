@@ -42,6 +42,7 @@ public class NotifyIcon
         notifyIcon.MouseDown += (sender, e) => OnEventReceived(sender, e, EVENT_MOUSEDOWN);
         notifyIcon.MouseMove += (sender, e) => OnEventReceived(sender, e, EVENT_MOUSEMOVE);
         notifyIcon.MouseUp += (sender, e) => OnEventReceived(sender, e, EVENT_MOUSEUP);
+        ContextMenuStrip = new ContextMenuStrip();
         UpdateStyle();
         ProcessContextMenuStrip();
         ThemeListener.ThemeChanged += OnThemeChanged;
@@ -54,10 +55,6 @@ public class NotifyIcon
 
     public void AddMenu(IEnumerable<ToolStripItem> menuItems)
     {
-        if (notifyIcon.ContextMenuStrip == null)
-        {
-            ContextMenuStrip = new ContextMenuStrip();
-        }
         foreach (ToolStripItem menuItem in menuItems)
         {
             if (menuItem.Text == "-")
@@ -73,11 +70,6 @@ public class NotifyIcon
 
     public ToolStripItem AddMenu(ToolStripItem menuItem)
     {
-        if (notifyIcon.ContextMenuStrip == null)
-        {
-            ContextMenuStrip = new ContextMenuStrip();
-        }
-
         notifyIcon.ContextMenuStrip!.Items.Add(menuItem);
         UpdateStyle();
         return menuItem;
@@ -319,7 +311,7 @@ public class NotifyIcon
             return;
         }
 
-        UpdatePadding(notifyIcon.ContextMenuStrip.Items);
+        UpdatePadding(notifyIcon.ContextMenuStrip!.Items);
 
         notifyIcon.ContextMenuStrip.Opening -= OnContextMenuStripOpening;
         notifyIcon.ContextMenuStrip.Opening += OnContextMenuStripOpening;

@@ -29,4 +29,8 @@ jobs:
         run: dotnet pack NotifyIcon\NotifyIcon.csproj -c Release --no-build -o out
 
       - name: Push NuGet package
-        run: dotnet nuget push "out\*.nupkg" -k ${{secrets.NUGET_AUTH_TOKEN}} --source https://api.nuget.org/v3/index.json
+        # run:  dotnet nuget push "out\*.nupkg" -k ${{secrets.NUGET_AUTH_TOKEN}} --source https://api.nuget.org/v3/index.json
+        uses: actions/upload-artifact@v3
+        with:
+          name: nuget-packages
+          path: out/*.nupkg

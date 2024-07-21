@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "NotifyIcon.Demo.WinUI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "NotifyIcon.Demo.WinUI (Unpackaged)": {
+      "commandName": "Project"
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "distributionName": ""
+    }
+  }
+}

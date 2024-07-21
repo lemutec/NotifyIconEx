@@ -9,16 +9,15 @@
 		<UseWPF>false</UseWPF>
 		<UseWinUI>false</UseWinUI>
 		<UseWindowsForms>true</UseWindowsForms>
-        <Version>1.0.6</Version>
+        <Version>1.0.7</Version>
         <Authors>Lemutec</Authors>
         <Company>Lemutec</Company>
         <Product>NotifyIconEx</Product>
-        <Description>Support dark mode theme NotifyIcon in WPF WinForm</Description>
+        <Description>NotifyIcon is an easy-to-use library for displaying NotifyIcon (notification icon) in WPF / WinForms / Avalonia / WinUI / MAUI applications, offering non-intrusive system notifications and quick access functionality in the taskbar.</Description>
         <PackageProjectUrl>https://github.com/lemutec/NotifyIconEx</PackageProjectUrl>
         <RepositoryUrl>https://github.com/lemutec/NotifyIconEx</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
-        <PackageTags>NotifyIcon .NET WPF WinForm</PackageTags>
-        <PackageReleaseNotes>First release</PackageReleaseNotes>
+        <PackageTags>NotifyIcon .NET WPF WinForm Avalonia WinUI MAUI</PackageTags>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>

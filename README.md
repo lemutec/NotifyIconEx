@@ -1,16 +1,14 @@
-# NotifyIcon [![NuGet](https://img.shields.io/nuget/v/NotifyIconEx.svg)](https://nuget.org/packages/NotifyIconEx) [![Actions](https://github.com/lemutec/NotifyIconEx/actions/workflows/library.nuget.yml/badge.svg)](https://github.com/lemutec/NotifyIconEx/actions/workflows/library.nuget.yml)
+# NotifyIconEx [![NuGet](https://img.shields.io/nuget/v/NotifyIconEx.svg)](https://nuget.org/packages/NotifyIconEx) [![Actions](https://github.com/lemutec/NotifyIconEx/actions/workflows/library.nuget.yml/badge.svg)](https://github.com/lemutec/NotifyIconEx/actions/workflows/library.nuget.yml)
 
-NotifyIcon is an easy-to-use library for displaying NotifyIcon (notification icon) in both WPF and WinForms applications, offering non-intrusive system notifications and quick access functionality in the taskbar.
+NotifyIconEx is an easy-to-use library for displaying NotifyIcon (notification icon) in WPF / WinForms / Avalonia / WinUI / MAUI applications, offering non-intrusive system notifications and quick access functionality in the taskbar.
 
-Support dark mode / show icon / checkable / submenus.
+> Support dark mode / show icon / checkable / submenus.
 
-Please enable the HiDPI in your Application for better rendering.
+> Please enable the HiDPI in your Application for better rendering.
 
 ## Usage
 
--------
-
-NotifyIcon is available as [NuGet package](https://www.nuget.org/packages/NotifyIconEx).
+NotifyIconEx is available as [NuGet package](https://www.nuget.org/packages/NotifyIconEx).
 
 ```csharp
 using NotifyIconEx;
@@ -60,12 +58,8 @@ void OnClick(object? sender, EventArgs e)
 
 ## Repository
 
--------
-
 The source code for NotifyIcon is hosted on GitHub. You can find it at the following URL: [https://github.com/lemutec/NotifyIconEx](https://github.com/lemutec/NotifyIconEx)
 
 ## License
 
--------
-
-NotifyIcon is released under the MIT license. This means you are free to use and modify it, as long as you comply with the terms of the license.
+NotifyIconEx is released under the MIT license. This means you are free to use and modify it, as long as you comply with the terms of the license.

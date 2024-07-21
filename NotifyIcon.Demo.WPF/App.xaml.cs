@@ -17,7 +17,7 @@ public partial class App : Application
         var notifyIcon = new NotifyIcon()
         {
             Text = "NotifyIcon",
-            Icon = Icon.ExtractAssociatedIcon(Process.GetCurrentProcess().MainModule?.FileName!)!
+            Icon = Icon.ExtractAssociatedIcon(Process.GetCurrentProcess().MainModule?.FileName!)!,
         };
         notifyIcon.AddMenu("MenuItem1", new Bitmap(ResourceHelper.GetStream("pack://application:,,,/Assets/Images/Lock.png")));
         var toDisableItem = notifyIcon.AddMenu("MenuItem2", new Bitmap(ResourceHelper.GetStream("pack://application:,,,/Assets/Images/Lock.png")));

@@ -18,7 +18,7 @@ internal static class Program
         var notifyIcon = new NotifyIcon()
         {
             Text = "NotifyIcon",
-            Icon = Icon.ExtractAssociatedIcon(Process.GetCurrentProcess().MainModule?.FileName!)!
+            Icon = Icon.ExtractAssociatedIcon(Process.GetCurrentProcess().MainModule?.FileName!)!,
         };
         notifyIcon.AddMenu("MenuItem1", new Bitmap(ResourceHelper.GetStream("NotifyIcon.Demo.WinForm.Assets.Images.Lock.png")));
         var toDisableItem = notifyIcon.AddMenu("MenuItem2", new Bitmap(ResourceHelper.GetStream("NotifyIcon.Demo.WinForm.Assets.Images.Lock.png")));

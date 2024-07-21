@@ -236,6 +236,15 @@ public class NotifyIcon
         set => notifyIcon.Icon = value;
     }
 
+    /// <summary>
+    /// <seealso cref="SystemFonts.MenuFont"/>
+    /// </summary>
+    public Font MenuFont
+    {
+        get => notifyIcon.ContextMenuStrip!.Font;
+        set => notifyIcon.ContextMenuStrip!.Font = value;
+    }
+
     public ContextMenuStrip ContextMenuStrip
     {
         get => notifyIcon.ContextMenuStrip!;

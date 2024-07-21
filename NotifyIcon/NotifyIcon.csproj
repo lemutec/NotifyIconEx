@@ -5,6 +5,7 @@
 		<LangVersion>12.0</LangVersion>
 		<Nullable>enable</Nullable>
         <PackageId>NotifyIconEx</PackageId>
+		<RootNamespace>NotifyIconEx</RootNamespace>
 		<UseWPF>false</UseWPF>
 		<UseWinUI>false</UseWinUI>
 		<UseWindowsForms>true</UseWindowsForms>

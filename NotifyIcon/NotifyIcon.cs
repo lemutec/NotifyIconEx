@@ -279,7 +279,7 @@ public class NotifyIcon
         set => notifyIcon.BalloonTipText = value;
     }
 
-    public NotifyIconPlacement MenuPlacement { get; set; } = NotifyIconPlacement.Default;
+    public NotifyIconPlacement MenuPlacement { get; set; } = NotifyIconPlacement.Modern;
 
     public void Dispose()
     {
@@ -303,9 +303,9 @@ public class NotifyIcon
 
     private void OnContextMenuStripOpening(object? sender, CancelEventArgs e)
     {
-        if (MenuPlacement == NotifyIconPlacement.Modern)
+        if (sender is ContextMenuStrip menu)
         {
-            if (sender is ContextMenuStrip menu)
+            if (MenuPlacement == NotifyIconPlacement.Modern)
             {
                 menu.Show(new Point(Control.MousePosition.X, Control.MousePosition.Y - menu.Height));
             }
@@ -332,9 +332,12 @@ public class NotifyIcon
         {
             for (int i = default; i < items.Count; i++)
             {
-                var item = items[i];
+                ToolStripItem item = items[i];
 
-                if (item is ToolStripMenuItem dropMenuItem && dropMenuItem.DropDownItems.Count > 0)
+                item.Padding = new Padding(0, 6, 0, 4);
+
+                // Actually item's `Margin` is not need to be set
+                if (item is ToolStripDropDownItem dropMenuItem && dropMenuItem.DropDownItems.Count > 0)
                 {
                     UpdatePadding(dropMenuItem.DropDownItems);
                 }
@@ -356,7 +359,7 @@ public class NotifyIcon
                 }
                 else
                 {
-                    item.Margin = new Padding(0);
+                    item.Margin = new Padding(0, 0, 0, 0);
                 }
             }
         }

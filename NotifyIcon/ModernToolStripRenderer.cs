@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
@@ -12,13 +11,19 @@ public class ModernToolStripRenderer : ToolStripProfessionalRenderer
     {
         ToolStripItem item = e.Item!;
 
-        DrawChevronRightArrow(e.Graphics, e.ArrowRectangle, item.Enabled ? item.ForeColor : Color.FromArgb(byte.MaxValue / 2, item.ForeColor.R, item.ForeColor.B, item.ForeColor.G));
+        DrawChevronRightArrow(
+            e.Graphics,
+            e.ArrowRectangle,
+            item.Enabled
+                ? item.ForeColor
+                : Color.FromArgb(byte.MaxValue / 2, item.ForeColor.R, item.ForeColor.G, item.ForeColor.B)
+        );
     }
 
     protected override void OnRenderItemCheck(ToolStripItemImageRenderEventArgs e)
     {
         var rect = e.ImageRectangle;
-        using Pen pen = new(e.Item.ForeColor, 2);
+        using Pen pen = new(e.Item.ForeColor, 2f);
         int x = rect.Left + 12;
         int y = rect.Top + (rect.Height - 10) / 2;
         Point[] points =
@@ -27,17 +32,30 @@ public class ModernToolStripRenderer : ToolStripProfessionalRenderer
             new Point(x + 6, y + 9),
             new Point(x + 15, y),
         ];
+
         e.Graphics.DrawLines(pen, points);
+    }
+
+    protected override void OnRenderItemText(ToolStripItemTextRenderEventArgs e)
+    {
+        e.TextRectangle = new Rectangle(
+            e.TextRectangle.X,
+            e.TextRectangle.Y + 4,
+            e.TextRectangle.Width,
+            e.TextRectangle.Height
+        );
+        base.OnRenderItemText(e);
     }
 
     protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
     {
         if (!e.Item.Selected) return;
 
-        Rectangle rect = new(4, 0, e.Item.Width - 8, e.Item.Height - 1);
+        Rectangle rect = new(6, 0, e.Item.Width - 12, e.Item.Height - 1);
         using SolidBrush brush = new(NotifyIconColors.HoverBackColor);
         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
         GraphicsPath path = GetRoundedRect(rect, 3);
+
         e.Graphics.FillPath(brush, path);
     }
 
@@ -66,19 +84,25 @@ public class ModernToolStripRenderer : ToolStripProfessionalRenderer
     private static void DrawChevronRightArrow(Graphics g, Rectangle rect, Color color)
     {
         // Fix size and location of the arrow
-        rect = new Rectangle(rect.Left - 9, rect.Top, Math.Max(rect.Width, 15), Math.Max(rect.Width, 28));
+        rect = new Rectangle(
+            rect.Left - 9,
+            rect.Top,
+            12,
+            24
+        );
 
-        int arrowSize = Math.Min(rect.Width, Math.Max(rect.Height, 28)) / 2;
+        int arrowSize = rect.Width / 2;
         int centerX = rect.Left + rect.Width / 2;
         int centerY = rect.Top + rect.Height / 2;
 
-        using Pen pen = new(color, 2);
+        using Pen pen = new(color, 2f);
         Point[] chevronPoints =
         [
             new Point(centerX - arrowSize / 2, centerY - arrowSize),
             new Point(centerX + arrowSize / 2, centerY),
             new Point(centerX - arrowSize / 2, centerY + arrowSize)
         ];
+
         g.DrawLines(pen, chevronPoints);
     }
 
@@ -132,15 +156,13 @@ public class ModernToolStripRenderer : ToolStripProfessionalRenderer
         {
             if (!e.Item.Enabled)
             {
-                float[][] matrixItems = [
+                ColorMatrix colorMatrix = new([
                     [1, 0, 0, 0, 0],
                     [0, 1, 0, 0, 0],
                     [0, 0, 1, 0, 0],
                     [0, 0, 0, 0.5f, 0],
                     [0, 0, 0, 0, 1]
-                ];
-
-                ColorMatrix colorMatrix = new(matrixItems);
+                ]);
                 ImageAttributes imageAttributes = new();
                 imageAttributes.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
@@ -160,7 +182,8 @@ public class ModernToolStripRenderer : ToolStripProfessionalRenderer
             // Since office images don't scoot one px we have to override all painting but enabled = false;
             if (e.Item.ImageScaling == ToolStripItemImageScaling.None)
             {
-                e.Graphics.DrawImage(image, imageRect, new Rectangle(new Point(6, 0), imageRect.Size), GraphicsUnit.Pixel);
+                imageRect.Offset(6, 0);
+                e.Graphics.DrawImage(image, imageRect, new Rectangle(Point.Empty, imageRect.Size), GraphicsUnit.Pixel);
             }
             else
             {

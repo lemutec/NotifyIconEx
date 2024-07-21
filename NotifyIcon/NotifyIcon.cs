@@ -279,6 +279,8 @@ public class NotifyIcon
         set => notifyIcon.BalloonTipText = value;
     }
 
+    public NotifyIconPlacement MenuPlacement { get; set; } = NotifyIconPlacement.Default;
+
     public void Dispose()
     {
         notifyIcon?.Dispose();
@@ -301,9 +303,12 @@ public class NotifyIcon
 
     private void OnContextMenuStripOpening(object? sender, CancelEventArgs e)
     {
-        if (sender is ContextMenuStrip menu)
+        if (MenuPlacement == NotifyIconPlacement.Modern)
         {
-            menu.Show(new Point(Control.MousePosition.X, Control.MousePosition.Y - menu.Height));
+            if (sender is ContextMenuStrip menu)
+            {
+                menu.Show(new Point(Control.MousePosition.X, Control.MousePosition.Y - menu.Height));
+            }
         }
     }
 

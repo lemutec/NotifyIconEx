@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotifyIcon.Demo.WinUI", "No
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotifyIcon.Demo.Avalonia", "NotifyIcon.Demo.Avalonia\NotifyIcon.Demo.Avalonia.csproj", "{D5C0A191-AF75-482C-AA26-CF13AE93248E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotifyIcon.Demo.Maui", "NotifyIcon.Demo.Maui\NotifyIcon.Demo.Maui.csproj", "{14AE6AB5-01D1-471A-B03D-DB574222DB77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotifyIcon.Demo.Maui", "NotifyIcon.Demo.Maui\NotifyIcon.Demo.Maui.csproj", "{14AE6AB5-01D1-471A-B03D-DB574222DB77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotifyIcon.Demo.Wice", "NotifyIcon.Demo.Wice\NotifyIcon.Demo.Wice.csproj", "{8A65AC0D-B065-448A-A557-CE7D38301941}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,6 +81,14 @@ Global
 		{14AE6AB5-01D1-471A-B03D-DB574222DB77}.Release|x64.ActiveCfg = Release|Any CPU
 		{14AE6AB5-01D1-471A-B03D-DB574222DB77}.Release|x64.Build.0 = Release|Any CPU
 		{14AE6AB5-01D1-471A-B03D-DB574222DB77}.Release|x64.Deploy.0 = Release|Any CPU
+		{8A65AC0D-B065-448A-A557-CE7D38301941}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A65AC0D-B065-448A-A557-CE7D38301941}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A65AC0D-B065-448A-A557-CE7D38301941}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8A65AC0D-B065-448A-A557-CE7D38301941}.Debug|x64.Build.0 = Debug|Any CPU
+		{8A65AC0D-B065-448A-A557-CE7D38301941}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A65AC0D-B065-448A-A557-CE7D38301941}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A65AC0D-B065-448A-A557-CE7D38301941}.Release|x64.ActiveCfg = Release|Any CPU
+		{8A65AC0D-B065-448A-A557-CE7D38301941}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

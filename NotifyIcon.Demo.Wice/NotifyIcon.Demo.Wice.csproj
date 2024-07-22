@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net472</TargetFramework>
+		<LangVersion>12.0</LangVersion>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Resource Include="Assets\Images\*.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Assets\Images\*.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="DirectN" Version="1.16.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="Wice">
+			<SpecificVersion>False</SpecificVersion>
+			<HintPath>packages\Wice.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Windows.SDK.Contracts">
+			<Version>10.0.26100.1</Version>
+		</PackageReference>
+		<PackageReference Include="System.Numerics.Vectors">
+			<Version>4.5.0</Version>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\NotifyIcon\NotifyIcon.csproj" />
+	</ItemGroup>
+
+</Project>

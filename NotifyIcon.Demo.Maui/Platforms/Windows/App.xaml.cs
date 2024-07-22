@@ -27,8 +27,8 @@ public partial class App : MauiWinUIApplication
             Text = "NotifyIcon",
             Icon = Icon.ExtractAssociatedIcon(Process.GetCurrentProcess().MainModule?.FileName!)!,
         };
-        notifyIcon.AddMenu("MenuItem1", new Bitmap(ResourceHelper.GetStream("MauiApp1.Assets.Images.Lock.png")));
-        var toDisableItem = notifyIcon.AddMenu("MenuItem2", new Bitmap(ResourceHelper.GetStream("MauiApp1.Assets.Images.Lock.png")));
+        notifyIcon.AddMenu("MenuItem1", new Bitmap(ResourceHelper.GetStream("NotifyIcon.Demo.Maui.Assets.Images.Lock.png")));
+        var toDisableItem = notifyIcon.AddMenu("MenuItem2", new Bitmap(ResourceHelper.GetStream("NotifyIcon.Demo.Maui.Assets.Images.Lock.png")));
         notifyIcon.AddMenu("-");
         notifyIcon.AddMenu("MenuItem3");
         notifyIcon.AddMenu("MenuItem4", true);

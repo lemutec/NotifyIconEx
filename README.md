@@ -1,10 +1,10 @@
-# NotifyIconEx [![NuGet](https://img.shields.io/nuget/v/NotifyIconEx.svg)](https://nuget.org/packages/NotifyIconEx) [![Actions](https://github.com/lemutec/NotifyIconEx/actions/workflows/library.nuget.yml/badge.svg)](https://github.com/lemutec/NotifyIconEx/actions/workflows/library.nuget.yml)
+# NotifyIconEx [![NuGet](https://img.shields.io/nuget/v/NotifyIconEx.svg)](https://nuget.org/packages/NotifyIconEx) [![Actions](https://github.com/lemutec/NotifyIconEx/actions/workflows/library.nuget.yml/badge.svg)](https://github.com/lemutec/NotifyIconEx/actions/workflows/library.nuget.yml) [![Platform](https://img.shields.io/badge/platform-Windows-blue?logo=windowsxp&color=1E9BFA)](https://dotnet.microsoft.com/zh-cn/download/dotnet/latest/runtime)
 
-NotifyIconEx is an easy-to-use library for displaying NotifyIcon (notification icon) in WPF / WinForms / Avalonia / WinUI / MAUI applications, offering non-intrusive system notifications and quick access functionality in the taskbar.
+NotifyIconEx is an easy-to-use library for displaying NotifyIcon (notification icon) in `WPF` / `WinForms` / `Avalonia` / `WinUI` / `MAUI` / `Wice` applications, offering non-intrusive system notifications and quick access functionality in the taskbar.
 
 > Support dark mode / show icon / checkable / submenus.
-
-> Please enable the HiDPI in your Application for better rendering.
+>
+> You should enable the HiDPI in your Application for better rendering.
 
 ## Usage
 
@@ -55,6 +55,16 @@ void OnClick(object? sender, EventArgs e)
     notifyIcon.ShowBalloonTip(5);
 }
 ```
+
+## Demo
+
+1. [NotifyIcon.Demo.Avalonia](https://github.com/lemutec/NotifyIconEx/tree/master/NotifyIcon.Demo.Avalonia) for [Avalonia](https://github.com/AvaloniaUI/Avalonia) Application.
+
+2. [NotifyIcon.Demo.Maui](https://github.com/lemutec/NotifyIconEx/tree/master/NotifyIcon.Demo.Maui) for [MAUI](https://github.com/dotnet/maui) Application.
+3. [NotifyIcon.Demo.WPF](https://github.com/lemutec/NotifyIconEx/tree/master/NotifyIcon.Demo.WPF) for [WPF](https://github.com/dotnet/wpf) Application.
+4. [NotifyIcon.Demo.Wice](https://github.com/lemutec/NotifyIconEx/tree/master/NotifyIcon.Demo.Wice) for [Wice](https://github.com/aelyo-softworks/Wice) Application.
+5. [NotifyIcon.Demo.WinForm](https://github.com/lemutec/NotifyIconEx/tree/master/NotifyIcon.Demo.WinForm) for [WinForms](https://github.com/dotnet/winforms) Application.
+6. [NotifyIcon.Demo.WinUI](https://github.com/lemutec/NotifyIconEx/tree/master/NotifyIcon.Demo.WinUI) for [WinUI](https://github.com/microsoft/microsoft-ui-xaml) Application.
 
 ## Repository
 

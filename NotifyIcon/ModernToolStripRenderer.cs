@@ -86,7 +86,7 @@ public class ModernToolStripRenderer : ToolStripProfessionalRenderer
         // Fix size and location of the arrow
         rect = new Rectangle(
             rect.Left - 9,
-            rect.Top,
+            rect.Top + 4,
             12,
             24
         );

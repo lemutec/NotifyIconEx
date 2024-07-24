@@ -12,7 +12,7 @@ labels: bug
 - 系统环境 / System Environment：
 
 
-- 版本号 / Fischless Version：
+- 版本号 / Version：
 
 
 - 问题描述 / Description of the issue：

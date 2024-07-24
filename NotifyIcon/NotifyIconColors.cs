@@ -4,10 +4,15 @@ namespace NotifyIconEx;
 
 internal static class NotifyIconColors
 {
-    public static Color ForeColor => ThemeListener.IsDarkMode ? ForeColorDark : ForeColorLight;
-    public static Color BackColor => ThemeListener.IsDarkMode ? BackColorDark : BackColorLight;
-    public static Color HoverBackColor => ThemeListener.IsDarkMode ? HoverBackColorDark : HoverBackColorLight;
-    public static Color SeparatorColor => ThemeListener.IsDarkMode ? SeparatorColorDark : SeparatorColorLight;
+    private static bool IsDarkMode =>
+        NotifyIcon.Theme == NotifyIconTheme.System
+            ? ThemeListener.IsDarkMode
+            : NotifyIcon.Theme == NotifyIconTheme.Dark;
+
+    public static Color ForeColor => IsDarkMode ? ForeColorDark : ForeColorLight;
+    public static Color BackColor => IsDarkMode ? BackColorDark : BackColorLight;
+    public static Color HoverBackColor => IsDarkMode ? HoverBackColorDark : HoverBackColorLight;
+    public static Color SeparatorColor => IsDarkMode ? SeparatorColorDark : SeparatorColorLight;
 
     private static Color ForeColorLight => Color.FromArgb(0x99, 0x00, 0x00, 0x00);
     private static Color ForeColorDark => Color.FromArgb(0x99, 0xFF, 0xFF, 0xFF);

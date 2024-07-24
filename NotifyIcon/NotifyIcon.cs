@@ -8,6 +8,8 @@ namespace NotifyIconEx;
 
 public class NotifyIcon
 {
+    public static NotifyIconTheme Theme { get; set; } = NotifyIconTheme.System;
+
     private readonly System.Windows.Forms.NotifyIcon notifyIcon = null!;
     private readonly ToolStripRenderer toolStripRenderer = null!;
     protected EventHandlerList Events = new();

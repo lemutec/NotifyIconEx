@@ -56,6 +56,14 @@ void OnClick(object? sender, EventArgs e)
 }
 ```
 
+You can set the context menu theme like following:
+
+```csharp
+// NotifyIcon default theme follows the system theme.
+// Change it to Dark theme.
+NotifyIcon.Theme = NotifyIconTheme.Dark;
+```
+
 ## Demo
 
 1. [NotifyIcon.Demo.Avalonia](https://github.com/lemutec/NotifyIconEx/tree/master/NotifyIcon.Demo.Avalonia) for [Avalonia](https://github.com/AvaloniaUI/Avalonia) Application.

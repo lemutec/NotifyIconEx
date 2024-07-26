@@ -285,6 +285,11 @@ public class NotifyIcon
         notifyIcon.ShowBalloonTip(timeout);
     }
 
+    public void ShowBalloonTip(int timeout, string tipTitle, string tipText, ToolTipIcon tipIcon)
+    {
+        notifyIcon.ShowBalloonTip(timeout, tipTitle, tipText, tipIcon);
+    }
+
     private void OnEventReceived(object? sender, EventArgs e, object eventKey)
     {
         Events[eventKey]?.DynamicInvoke(sender, e);

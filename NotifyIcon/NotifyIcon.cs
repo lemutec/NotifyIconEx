@@ -25,6 +25,10 @@ public class NotifyIcon
     private static readonly object EVENT_BALLOONTIPCLOSED = new();
     private static readonly object EVENT_DISPOSED = new();
 
+    public NotifyIcon() : this(null!)
+    {
+    }
+
     public NotifyIcon(ToolStripRenderer toolStripRenderer = null!)
     {
         this.toolStripRenderer = toolStripRenderer ?? new ModernToolStripRenderer();
@@ -358,7 +362,7 @@ public class NotifyIcon
                 }
                 else
                 {
-                    item.Margin = new Padding(0, 0, 0, 0);
+                    item.Margin = Padding.Empty;
                 }
             }
         }

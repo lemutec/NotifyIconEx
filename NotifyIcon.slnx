@@ -1,0 +1,18 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+  </Configurations>
+  <Project Path="NotifyIcon.Demo.Avalonia/NotifyIcon.Demo.Avalonia.csproj" />
+  <Project Path="NotifyIcon.Demo.Maui/NotifyIcon.Demo.Maui.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="NotifyIcon.Demo.Wice/NotifyIcon.Demo.Wice.csproj" />
+  <Project Path="NotifyIcon.Demo.WinForm/NotifyIcon.Demo.WinForm.csproj" />
+  <Project Path="NotifyIcon.Demo.WinUI/NotifyIcon.Demo.WinUI.csproj">
+    <Platform Project="x64" />
+    <Deploy />
+  </Project>
+  <Project Path="NotifyIcon.Demo.WPF/NotifyIcon.Demo.WPF.csproj" />
+  <Project Path="NotifyIcon/NotifyIcon.csproj" />
+</Solution>

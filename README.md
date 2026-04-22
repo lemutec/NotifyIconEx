@@ -1,3 +1,10 @@
+> [!TIP]
+>
+> [NativeTray](https://github.com/emako/NativeTray) has reached a stable release stage, and this repository is no longer maintained.
+>
+> NativeTray provides more complete native tray functionality and no longer depends on WinForms. It also supports AOT compilation, and migration is recommended.
+
+
 # NotifyIconEx [![NuGet](https://img.shields.io/nuget/v/NotifyIconEx.svg)](https://nuget.org/packages/NotifyIconEx) [![Actions](https://github.com/lemutec/NotifyIconEx/actions/workflows/library.nuget.yml/badge.svg)](https://github.com/lemutec/NotifyIconEx/actions/workflows/library.nuget.yml) [![Platform](https://img.shields.io/badge/platform-Windows-blue?logo=windowsxp&color=1E9BFA)](https://dotnet.microsoft.com/zh-cn/download/dotnet/latest/runtime)
 
 NotifyIconEx is an easy-to-use library for displaying NotifyIcon (notification icon) in `WPF` / `WinForms` / `Avalonia` / `WinUI` / `MAUI` / `Wice` applications, offering non-intrusive system notifications and quick access functionality in the taskbar.
